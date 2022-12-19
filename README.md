@@ -114,5 +114,46 @@ data = pd.read_csv(filename)
 # por padrão, exibe as 5 primeiras linhas do dataframe
 data.head()
 ```
+___
+# Importando dados de outros tipos de arquivos
 
-### Considerações finais sobre importação de dados
+### Introdução a outros tipos de arquivos
+
+Alguns outros formatos de arquivos podem ser lidos, como :
+
+    * planilhas de Excel
+    * arquivos MATLAB
+    * arquivos SAS
+    * arquivos Stata
+    * arquivos HDF5
+
+* **pickled files-** tipo de arquivo nativo do Python. São arquivos serializados, convertidos em uma sequência de bytes.
+
+```python
+# devemos importar o pacote pickle
+import pickle
+# rb - read only binary
+with open('pickled_fruit.pkl', 'rb') as file:
+data = pickle.load(file)
+print(data)
+
+{'peaches': 13, 'apples': 4, 'oranges': 11}
+```
+
+* **planilhas do excel**
+```python
+import pandas as pd
+file = 'urbanpop.xlsx'
+data = pd.ExcelFile(file)
+print(data.sheet_names)
+
+['1960-1966', '1967-1974', '1975-2011']
+
+df1 = data.parse('1960-1966') # nome de uma aba, como string
+df2 = data.parse(0) # índice de uma aba, como float
+```
+
+### Importando arquivos SAS/Stata usando Pandas
+
+### Importando arquivos HDF5
+
