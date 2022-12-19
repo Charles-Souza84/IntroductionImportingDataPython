@@ -154,6 +154,67 @@ df2 = data.parse(0) # índice de uma aba, como float
 
 ### Importando arquivos SAS/Stata usando Pandas
 
-* SAS - Statistical Analysis System
+* SAS - Statistical Analysis System. Análise de negócios e bioestatísticas. Os arquivos SAS são usados em:
+    * análises avançadas;
+    * análises multivariada;
+    * inteligência de negócios;
+    * manipulação de dados;
+    * análise preditiva;
+    * padrão para análise computacional;
+<p></p>
+
+* **importando arquivo SAS**
+```python
+import pandas as pd
+from sas7bdat import SAS7BDAT
+with SAS7BDAT('urbanpop.sas7bdat') as file:
+    df_sas = file.to_data_frame()
+```
+* Stata - “Statistics” + “data”. Empregado em pesquisa acadêmica de ciências sociais.
+<p></p>
+
+* **importando arquivo Stata**
+```python
+import pandas as pd
+data = pd.read_stata('urbanpop.dta')
+``` 
 ### Importando arquivos HDF5
 
+* Hierarchical Data Format version 5;
+* Padrão para armazenar grandes quantidades de dados numéricos;
+* Datasets podem ter centenas de gigabytes ou terabytes;
+* HDF5 pode escalar a exabytes;
+
+* **importando arquilo HDF5**
+```python
+import h5py
+filename = 'H-H1_LOSC_4_V1-815411200-4096.hdf5'
+data = h5py.File(filename, 'r') # 'r' é para leitura
+print(type(data))
+<class 'h5py._hl.files.File'>
+```
+
+* **a estrutura de arquivos HDF5**
+```python
+for key in data.keys():
+    print(key)
+meta # meta dados do arquivo
+quality # qualidade dos dados
+strain # dados armazenados no arquivo
+```
+```python
+for key in data['meta'].keys():
+    print(key)
+
+Description
+DescriptionURL
+Detector
+Duration
+GPSstart
+Observatory
+Type
+UTCstart
+
+print(np.array(data['meta']['Description']), np.array(data['meta']['Detector']))
+b'Strain data time series from LIGO' b'H1'
+```
