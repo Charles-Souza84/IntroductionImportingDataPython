@@ -218,3 +218,31 @@ UTCstart
 print(np.array(data['meta']['Description']), np.array(data['meta']['Detector']))
 b'Strain data time series from LIGO' b'H1'
 ```
+### Importando arquivos MATLAB
+
+* Matrix Laboratory;
+* Padrão industrial na engenharia e ciência;
+* Dados salvos como arquivos .mat;
+
+<p></p>
+A biblioteca scipy possui as seguintes funções :
+
+* scipy.io.loadmat() - carrega arquivos .mat 
+* scipy.io.savemat() - salva arquivos .mat 
+
+* **importando um arquivo .mat**
+
+```python
+import scipy.io
+filename = 'workspace.mat'
+mat = scipy.io.loadmat(filename)
+print(type(mat))
+
+<class 'dict'>
+```
+* keys - nomes das variáveis MATLAB
+* values - objetos atribuidos a variáveis
+```python
+print(type(mat['x']))
+<class 'numpy.ndarray'>
+```
