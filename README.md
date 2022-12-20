@@ -283,8 +283,39 @@ print(table_names)
 'Region', 'Shippers', 'Suppliers', 'Territories']
 ```
 
-
 ### Fazendo buscas em bancos relacionais Python
+
+Após criarmos o database engine podemos fazer acesso ao banco com as buscas desejadas. Normalmente seguimos as seguintes etapas :
+
+* importar pacotes e funções;
+* criar a engine;
+* estabelecer uma conexão com a engine;
+* fazer consultas aos dados no banco;
+* salvar os resultados em dataframe;
+* fechar a conexão;
+
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+engine = create_engine('sqlite:///Northwind.sqlite')
+con = engine.connect() # cria a conexão com a engine
+rs = con.execute("SELECT * FROM Orders") # executa a conexão com a query desejada
+df = pd.DataFrame(rs.fetchall())  # fetcheall - retorna um array multidimensional com todas as linhas 
+df.columns = rs.keys() # seta o nome das colunas
+con.close() # fecha a conexão 
+```
+* **com context manager construct**
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+engine = create_engine('sqlite:///Northwind.sqlite')
+with engine.connect() as con:
+    rs = con.execute("SELECT OrderID, OrderDate, ShipName FROM Orders")
+    df = pd.DataFrame(rs.fetchmany(size=5)) # fetchmany(size= N) - retorna N linhas 
+    df.columns = rs.keys()
+```
+
+
 
 ### Fazendo buscas em bancos relacionais diretamente com Pandas
 
