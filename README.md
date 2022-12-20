@@ -246,3 +246,47 @@ print(type(mat))
 print(type(mat['x']))
 <class 'numpy.ndarray'>
 ```
+___
+# Trabalhando com bancos relacionais em Python
+
+### Introdução a bancos relacionais
+
+Um banco de dados é composto por tabelas e cada tabela representa um tipo de entidade. Em um banco relacional, cada linha representa
+uma instância da entidade e cada coluna, um atributo. É importante que cada coluna tenha um identificador único ( primary_key ). Em um banco relacional temos várias tabelas que se relacionam.
+
+SQL - Structured Query Language - linguagem que descreve como nos comunicamos com um banco de dados, acessando os dados e os atualizando.
+
+### Criando um database engine
+
+Para acessar os dados em uma banco de dados precisamos inicialmente nos conectarmos ao banco.
+
+* SQLite database - simples e rápido
+
+* SQLAlchemy - trabalha com outros sistemas gerenciados de banco de dados como Postgres e MySQL
+
+* **criando o database engine**
+```python
+from sqlalchemy import create_engine
+# a função create_engine recebe como argumento o tipo e nome do banco
+# connection string
+engine = create_engine('sqlite:///Northwind.sqlite')
+```
+* **acessando os nomes das tabelas**
+```python
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///Northwind.sqlite')
+
+table_names = engine.table_names()
+print(table_names)
+
+['Categories', 'Customers', 'EmployeeTerritories','Employees', 'Order Details', 'Orders', 'Products',
+'Region', 'Shippers', 'Suppliers', 'Territories']
+```
+
+
+### Fazendo buscas em bancos relacionais Python
+
+### Fazendo buscas em bancos relacionais diretamente com Pandas
+
+### Buscas avançadas : explorando relacionamentos de tabelas
+
