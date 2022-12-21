@@ -314,10 +314,33 @@ with engine.connect() as con:
     df = pd.DataFrame(rs.fetchmany(size=5)) # fetchmany(size= N) - retorna N linhas 
     df.columns = rs.keys()
 ```
-
-
-
 ### Fazendo buscas em bancos relacionais diretamente com Pandas
+
+Com Pandas podemos fazer em apenas uma linha a conexão ao banco e a execução da query desejada :
+
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+engine = create_engine('sqlite:///Northwind.sqlite')
+with engine.connect() as con:
+    rs = con.execute("SELECT * FROM Orders")
+    df = pd.DataFrame(rs.fetchall())
+    df.columns = rs.keys()
+# utilizando a função read_sql_query passamos a query como primeiro argumento e a engine a qual desejamos nos conectar
+df = pd.read_sql_query("SELECT * FROM Orders", engine)
+```
 
 ### Buscas avançadas : explorando relacionamentos de tabelas
 
+Podemos realizar buscas mais complexas fazendo JOIN de tabelas, tendo acesso aos campos contidos em cada uma delas.
+
+* **INNER JOIN**
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+engine = create_engine('sqlite:///Northwind.sqlite')
+# INNER JOIN cria uma nova tabela a partir do relacionamento da FK de uma tabela que corresponde a PK de outra
+df = pd.read_sql_query("SELECT OrderID, CompanyName FROM Orders
+INNER JOIN Customers on Orders.CustomerID = Customers.CustomerID", engine)
+print(df.head())
+```
