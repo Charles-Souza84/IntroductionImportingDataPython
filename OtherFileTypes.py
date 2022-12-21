@@ -1,5 +1,6 @@
 """
 Listing sheets in Excel files
+
 Whether you like it or not, any working data scientist will need to deal with Excel spreadsheets at some point in time. 
 You won't always want to do so in Excel, however!
 
@@ -14,19 +15,21 @@ Peace Research Institute Oslo's (PRIO) dataset. This data contains age-adjusted 
 over several years.
 """
 
-# Import pandas
+# importando pandas
 import pandas as pd
 
-# Assign spreadsheet filename: file
+# atribuindo o nome do arquivo à variável file
 file = 'battledeath.xlsx'
 
-# Load spreadsheet: xls
+# carregando a planilha 
 xls = pd.ExcelFile(file)
-# Print sheet names
+
+# imprimindo os nomes das abas da planilha
 print(xls.sheet_names)
 
 """
 Importing sheets from Excel files
+
 In the previous exercises, you saw that the Excel file contains two sheets, '2002' and '2004'. The next step is to import these.
 
 In this exercise, you'll learn how to import any given sheet of your loaded .xlsx file as a DataFrame. 
@@ -34,20 +37,21 @@ You'll be able to do so by specifying either the sheet's name or its index.
 
 The spreadsheet 'battledeath.xlsx' is already loaded as xls.
 """
-# Load a sheet into a DataFrame by name: df1
+# carregando uma aba da planilha em um dataframe : df1
 df1 = xls.parse('2004')
 
-# Print the head of the DataFrame df1
+# imprimindo o head do dataframe df1
 print(df1.head())
 
-# Load a sheet into a DataFrame by index: df2
+# carregando uma aba da planilha em um dataframe : df2
 df2 = xls.parse(0)
 
-# Print the head of the DataFrame df2
+# imprimindo o head do dataframe df2
 print(df2.head())
 
 """
 Customizing your spreadsheet import
+
 Here, you'll parse your spreadsheets and use additional arguments to skip rows, rename columns and select only particular columns.
 
 The spreadsheet 'battledeath.xlsx' is already loaded as xls.
@@ -57,20 +61,21 @@ These skip rows, name the columns and designate which columns to parse, respecti
 containing the specific row numbers, strings and column numbers, as appropriate.
 """
 
-# Parse the first sheet and rename the columns: df1
+# carregando a primeira aba e renomeando as colunas : df1
 df1 = xls.parse(0, skiprows= [0], names=['Country', 'AAM due to War (2002)'])
 
-# Print the head of the DataFrame df1
+# imprimindo o head do dataframe df1
 print(df1.head())
 
-# Parse the first column of the second sheet and rename the column: df2
+# carregando a primeira aba e renomeando as colunas : df1
 df2 = xls.parse(1, usecols=[0], skiprows=[0], names=['Country'])
 
-# Print the head of the DataFrame df2
+# imprimindo o head do dataframe df2
 print(df2.head())
 
 """
-mporting SAS files
+Importing SAS files
+
 In this exercise, you'll figure out how to import a SAS file as a DataFrame using SAS7BDAT and pandas.
 
 The data are adapted from the website of the undergraduate text book Principles of Econometrics by Hill, Griffiths and Lim.
@@ -82,33 +87,31 @@ import matplotlib.pyplot as plt
 # Import sas7bdat package
 from sas7bdat import SAS7BDAT
 
-# Save file to a DataFrame: df_sas
+# salvando o arquivo em um dataframe : df_sas
 with SAS7BDAT('sales.sas7bdat') as file:
     df_sas = file.to_data_frame()
 
-# Print head of DataFrame
+# imprimindo o head do dataframe
 print(df_sas.head())
 
-# Plot histogram of DataFrame features (pandas and pyplot already imported)
+# plotando um histograma com os atributos do dataframe
 pd.DataFrame.hist(df_sas[['P']])
 plt.ylabel('count')
 plt.show()
 
 """
 Importing Stata files
+
 Here, you'll gain expertise in importing Stata files as DataFrames using the  pd.read_stata() function from pandas. 
 """
 
-# Import pandas
-import pandas as pd
-
-# Load Stata file into a pandas DataFrame: df
+# carregando o arquivo stata em um dataframe : df
 df = pd.read_stata('disarea.dta')
 
-# Print the head of the DataFrame df
+# imprimindo o head do dataframe 
 print(df.head())
 
-# Plot histogram of one column of the DataFrame
+# plotando o histograma de uma coluna do dataframe
 pd.DataFrame.hist(df[['disa10']])
 plt.xlabel('Extent of disease')
 plt.ylabel('Number of countries')
@@ -116,51 +119,53 @@ plt.show()
 
 """
 Using h5py to import HDF5 files
+
 The file 'LIGO_data.hdf5' is already in your working directory. In this exercise, you'll import it using the h5py library. 
 You'll also print out its datatype to confirm you have imported it correctly. You'll then study the structure of the file in order
  to see precisely what HDF groups it contains.
 """
-# Import packages
+# importando as bibliotecas NumPy e h5py
 import numpy as np
 import h5py
 
-# Assign filename: file
+# atribuindo o nome do arquivo à variável file
 file = 'LIGO_data.hdf5'
 
-# Load file: data
+# carregando o arquivo file, atribuindo à variável data
 data = h5py.File(file, 'r')
 
-# Print the datatype of the loaded file
+# imprimindo o datatype do arquivo carregado
 print(type(data))
 
-# Print the keys of the file
+# imprimindo as chaves do arquivo
 for key in data.keys():
     print(key)
 
 """
 Extracting data from your HDF5 file
+
 In this exercise, you'll extract some of the LIGO experiment's actual data from the HDF5 file and you'll visualize it.
 
 To do so, you'll need to first explore the HDF5 group 'strain'
 """
 
-# Get the HDF5 group: group
+# selecionando um grupo do arquivo HDF5
 group = data['strain']
 
-# Check out keys of group
+# imprimindo as chaves do grupo selecionado
 for key in group.keys():
     print(key)
 
-# Set variable equal to time series data: strain
+# atribuindo à variável strain a série temporal 
 strain = np.array(data['strain']['Strain'])
 
-# Set number of time points to sample: num_samples
+# atribuindo o número de pontos temporais para amostra
 num_samples = 10000
 
-# Set time vector
+# atribuindo o vetor temporal
 time = np.arange(0, 1, 1/num_samples)
 
-# Plot data
+# plotando os dados
 plt.plot(time, strain[:num_samples])
 plt.xlabel('GPS Time (s)')
 plt.ylabel('strain')
@@ -169,25 +174,26 @@ plt.show()
 """
 The file 'ja_data2.mat' contains gene expression data from the Albeck Lab at UC Davis. 
 """
-# Import package
+
+# importando a biblioteca scipy
 import scipy.io
 
-# Load MATLAB file: mat
+# carregando o arquivo .mat
 mat = scipy.io.loadmat('ja_data2.mat')
 
-# Print the datatype type of mat
+# imprimindo o datatype do arquivo 
 print(type(mat))
 
-# Print the keys of the MATLAB dictionary
+# imprimindo as chaves do dicionário MATLAB
 print(mat.keys())
 
-# Print the type of the value corresponding to the key 'CYratioCyt'
+# imprimindo o tipo de conteúdo correspondentes a chave 'CYratioCyt'
 print(type(mat['CYratioCyt']))
 
-# Print the shape of the value corresponding to the key 'CYratioCyt'
+# imprimindo o shape do conteúdo referente a chave 'CYratioCyt'
 print(np.shape(mat['CYratioCyt']))
 
-# Subset the array and plot it
+# selecionando parte do array e plotando os dados
 data = mat['CYratioCyt'][25, 5:]
 fig = plt.figure()
 plt.plot(data)
