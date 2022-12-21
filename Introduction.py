@@ -101,6 +101,7 @@ print(data['Survived'])
 
 """
 Working with mixed datatypes (2)
+
 There is also another function np.recfromcsv()  that behaves similarly to np.genfromtxt(), except that its default dtype is None. 
 """
 
@@ -116,8 +117,6 @@ print(d[:3])
 """
 Using pandas to import flat files as DataFrames (1)
 
-In the last exercise, you were able to import flat files containing columns with different datatypes as numpy arrays. 
-However, the DataFrame object in pandas is a more appropriate structure in which to store such data and, thankfully, 
 we can easily import files of mixed data types as DataFrames using the pandas functions read_csv() and read_table().
 """
 
@@ -133,9 +132,9 @@ print(df.head())
 """
 Using pandas to import flat files as DataFrames (2)
 
-In the last exercise, you were able to import flat files into a pandas DataFrame. As a bonus, it is then straightforward 
-to retrieve the corresponding numpy array using the attribute values. You'll now have a chance to do this using the MNIST dataset, 
-which is available as digits.csv.
+We are able to import flat files into a pandas DataFrame. It is then straightforward 
+to retrieve the corresponding numpy array using the attribute values. 
+
 """
 
 # atribuindo o nome do arquivo à variável file

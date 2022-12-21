@@ -4,15 +4,9 @@ Listing sheets in Excel files
 Whether you like it or not, any working data scientist will need to deal with Excel spreadsheets at some point in time. 
 You won't always want to do so in Excel, however!
 
-Here, you'll learn how to use pandas to import Excel spreadsheets and how to list the names of the sheets in any loaded .xlsx file.
+Loading and checking out the spreadsheet 'battledeath.xlsx', modified from the Peace Research Institute Oslo's (PRIO) dataset. 
+This data contains age-adjusted mortality rates due to war in various countries over several years.
 
-Recall from the video that, given an Excel file imported into a variable spreadsheet, you can retrieve a list of the 
-sheet names using the attribute spreadsheet.sheet_names.
-
-Specifically, you'll be loading and checking out the spreadsheet 'battledeath.xlsx', modified from the 
-
-Peace Research Institute Oslo's (PRIO) dataset. This data contains age-adjusted mortality rates due to war in various countries 
-over several years.
 """
 
 # importando pandas
@@ -30,13 +24,11 @@ print(xls.sheet_names)
 """
 Importing sheets from Excel files
 
-In the previous exercises, you saw that the Excel file contains two sheets, '2002' and '2004'. The next step is to import these.
+Learning how to import any given sheet of your loaded .xlsx file as a DataFrame. 
+    * specifying either the sheet's name or its index.
 
-In this exercise, you'll learn how to import any given sheet of your loaded .xlsx file as a DataFrame. 
-You'll be able to do so by specifying either the sheet's name or its index.
-
-The spreadsheet 'battledeath.xlsx' is already loaded as xls.
 """
+
 # carregando uma aba da planilha em um dataframe : df1
 df1 = xls.parse('2004')
 
@@ -52,13 +44,12 @@ print(df2.head())
 """
 Customizing your spreadsheet import
 
-Here, you'll parse your spreadsheets and use additional arguments to skip rows, rename columns and select only particular columns.
+Parse your spreadsheets and use additional arguments to skip rows, rename columns and select only particular columns.
 
-The spreadsheet 'battledeath.xlsx' is already loaded as xls.
-
-As before, you'll use the method parse(). This time, however, you'll add the additional arguments skiprows, names and usecols. 
+    * method parse() - additional arguments skiprows, names and usecols. 
 These skip rows, name the columns and designate which columns to parse, respectively. All these arguments can be assigned to lists 
 containing the specific row numbers, strings and column numbers, as appropriate.
+
 """
 
 # carregando a primeira aba e renomeando as colunas : df1
@@ -76,9 +67,8 @@ print(df2.head())
 """
 Importing SAS files
 
-In this exercise, you'll figure out how to import a SAS file as a DataFrame using SAS7BDAT and pandas.
+Figure out how to import a SAS file as a DataFrame using SAS7BDAT and pandas.
 
-The data are adapted from the website of the undergraduate text book Principles of Econometrics by Hill, Griffiths and Lim.
 """
 
 # importando matplotlib.pyplot
@@ -102,7 +92,8 @@ plt.show()
 """
 Importing Stata files
 
-Here, you'll gain expertise in importing Stata files as DataFrames using the  pd.read_stata() function from pandas. 
+Importing Stata files as DataFrames using the  pd.read_stata() function from pandas. 
+
 """
 
 # carregando o arquivo stata em um dataframe : df
@@ -120,9 +111,9 @@ plt.show()
 """
 Using h5py to import HDF5 files
 
-The file 'LIGO_data.hdf5' is already in your working directory. In this exercise, you'll import it using the h5py library. 
-You'll also print out its datatype to confirm you have imported it correctly. You'll then study the structure of the file in order
- to see precisely what HDF groups it contains.
+Print out its datatype to confirm you have imported it correctly then study the structure of the file in order to see precisely 
+what HDF groups it contains.
+
 """
 # importando as bibliotecas NumPy e h5py
 import numpy as np
@@ -144,7 +135,7 @@ for key in data.keys():
 """
 Extracting data from your HDF5 file
 
-In this exercise, you'll extract some of the LIGO experiment's actual data from the HDF5 file and you'll visualize it.
+Extract some of the LIGO experiment's actual data from the HDF5 file and you'll visualize it.
 
 To do so, you'll need to first explore the HDF5 group 'strain'
 """

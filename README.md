@@ -258,7 +258,8 @@ SQL - Structured Query Language - linguagem que descreve como nos comunicamos co
 
 ### Criando um database engine
 
-Para acessar os dados em uma banco de dados precisamos inicialmente nos conectarmos ao banco.
+Para acessar os dados em uma banco de dados precisamos inicialmente nos conectarmos ao banco e este acesso é feito mediante um engine, que é a ponte de conexão ao banco de dados. Podemos fazer acesso ao banco por meio de comandos do engine, mas isso não é 
+recomendado.
 
 * SQLite database - simples e rápido
 
